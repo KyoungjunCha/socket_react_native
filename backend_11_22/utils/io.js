@@ -22,11 +22,11 @@ module.exports = function (io) {
 
     //23.11.29
     //login 이라는 이름으로 불러옴
-    socket.on("login", async (userName, cb) => {
-      //유저정보를 저장하는 함수
-      // 통신과 관련없기 떄문에 controller 에서 처리
-      console.log("유저네임",userName)
-    })
+    // socket.on("login", async (userName, cb) => {
+    //   //유저정보를 저장하는 함수
+    //   // 통신과 관련없기 떄문에 controller 에서 처리
+    //   console.log("유저네임",userName)
+    // })
 
 
 

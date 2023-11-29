@@ -20,18 +20,20 @@ export default function Homescreen({ navigation }) {
   
 
     //23.11.29
-    //계정 생성 
-    function App(){
-      useEffect(()=>{
-        askUserName();
-      },[]);
-      const askUserName = () =>{
-        const userName = prompt("Please register first")
-        socket.emit("login",userName,(res)=>{
-          console.log("RES",res)
-        })
-      }
-    }
+    //계정 생성 해당 함수들의 형식으로 아래 함수 handleRegisterAndSignIn 이 바뀌어야함 
+    // function App(){
+    //   useEffect(()=>{
+    //     askUserName();
+    //   },[]);
+    //   const askUserName = () =>{
+    //     const userName = prompt("Please register first")
+    //     socket.emit("login",userName,(res)=>{
+    //       console.log("RES",res)
+    //     })
+    //   }
+    // }
+
+
     function handleRegisterAndSignIn(isLogin) {
       if (currentUserName.trim() !== "") {
         const index = allUsers.findIndex(
