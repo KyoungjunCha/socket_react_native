@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ImageBackground, StyleSheet, Text, View, Pressable, TextInput, Alert,Keyboard } from "react-native";
 import homeImage from "../assets/home-image.jpg"
 import { useContext } from "react";
@@ -19,19 +19,46 @@ export default function Homescreen({ navigation }) {
     } = useContext(GlobalContext);
   
 
-    //23.11.29
+    //23.11.30
     //계정 생성 해당 함수들의 형식으로 아래 함수 handleRegisterAndSignIn 이 바뀌어야함 
     // function App(){
+    //   const [user,setUser] = useState(null);
+    //   const [messageList,setMessageList] = useState([])
     //   useEffect(()=>{
+    //     socket.on('message',(message)=>{
+    //       setMessageList((prevState)=> prevState.concat(message));
+    //     })
     //     askUserName();
     //   },[]);
+
     //   const askUserName = () =>{
     //     const userName = prompt("Please register first")
     //     socket.emit("login",userName,(res)=>{
-    //       console.log("RES",res)
+    //       if(res?.ok){
+    //         setUser(res.data);
+    //       }
+    //     })
+    //   }
+
+    //   const sendMessage = (Event) => {
+    //     Event.preventDefault()
+    //     socket.emit("sendMessage",message,(res)=>{
+
     //     })
     //   }
     // }
+
+
+    //11.30 추가부분
+    useEffect(()=>{
+      socket.on('login',(data)=>{
+        if(data.ok){
+          setCurrentUser(data.data.name);
+        }else{
+          Alert.alert(data.error);
+        }
+      })
+    })
 
 
     function handleRegisterAndSignIn(isLogin) {
@@ -62,6 +89,16 @@ export default function Homescreen({ navigation }) {
       }
   
       Keyboard.dismiss();
+
+      //추가부분 11.30
+      socket.emit('login', currentUserName, (res) => {
+        if (res.ok) {
+          setCurrentUser(res.data.name);
+        } else {
+          Alert.alert(res.error);
+        }
+      });
+
     }
   
     useEffect(() => {
